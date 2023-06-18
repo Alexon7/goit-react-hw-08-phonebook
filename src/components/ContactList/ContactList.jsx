@@ -1,7 +1,7 @@
 import { List, Item, Text, Button } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
-import { selectExistingContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/contacts/operations';
+import { selectExistingContacts } from 'redux/contacts/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
