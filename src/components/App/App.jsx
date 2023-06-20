@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { lazy } from 'react';
-import { GlobalStyleComponent } from '../../styles/GlobalStyles';
+// import { GlobalStyleComponent } from '../../styles/GlobalStyles';
 import { Routes, Route } from 'react-router-dom';
 import { PrivateRoute } from 'utils/PrivateRoute';
 import { RestrictedRoute } from 'utils/RestrictedRoute';
@@ -9,7 +9,7 @@ import { refreshUser } from 'redux/auth/operations';
 import { Layout } from '../Layout/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const HomePage = lazy(() => import('../../pages/Home'));
 const RegisterPage = lazy(() => import('../../pages/Register'));
