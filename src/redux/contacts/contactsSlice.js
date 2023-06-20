@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operations';
+import { logOut } from 'redux/auth/operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -10,6 +11,11 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
+};
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -17,32 +23,30 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  extraReducers: {
-    [fetchContacts.pending]: handlePending,
-    [addContact.pending]: handlePending,
-    [deleteContact.pending]: handlePending,
-
-    [fetchContacts.rejected]: handleRejected,
-    [addContact.rejected]: handleRejected,
-    [deleteContact.rejected]: handleRejected,
-
-    [fetchContacts.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = action.payload;
-    },
-    [addContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts.push(action.payload);
-    },
-    [deleteContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload.id
+  extraReducers: builder => {
+    builder
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
+        state.contacts = payload;
+      })
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        state.contacts.push(payload);
+      })
+      .addCase(deleteContact.fulfilled, (state, { payload }) => {
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== payload.id
+        );
+      })
+      .addCase(logOut.fulfilled, state => {
+        state.items = [];
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addMatcher(action => action.type.endsWith('/pending'), handlePending)
+      .addMatcher(action => action.type.endsWith('/rejected'), handleRejected)
+      .addMatcher(
+        action => action.type.endsWith('/fulfilled'),
+        handleFulfilled
       );
-    },
   },
 });
 

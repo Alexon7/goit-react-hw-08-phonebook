@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { lazy } from 'react';
-// import { GlobalStyleComponent } from '../../styles/GlobalStyles';
 import { Routes, Route } from 'react-router-dom';
 import { PrivateRoute } from 'utils/PrivateRoute';
 import { RestrictedRoute } from 'utils/RestrictedRoute';
