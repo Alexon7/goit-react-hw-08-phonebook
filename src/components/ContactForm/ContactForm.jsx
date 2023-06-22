@@ -10,14 +10,14 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
 
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const inputChange = event => {
     if (event.target.name === 'name') {
       setName(event.target.value);
     }
     if (event.target.name === 'phone') {
-      setPhone(event.target.value);
+      setNumber(event.target.value);
     }
   };
 
@@ -26,7 +26,7 @@ export const ContactForm = () => {
 
     const contact = {
       name,
-      phone,
+      number,
     };
 
     const isAtList = contacts.find(
@@ -94,31 +94,4 @@ export const ContactForm = () => {
       </Button>
     </Box>
   );
-  // <form onSubmit={handleSubmit}>
-  //   <Wrapper>
-  //     <Label htmlFor="name">Name</Label>
-  //     <Input
-  //       type="text"
-  //       name="name"
-  //       // pattern="^[a-zA-Z\s]+$"
-  //       pattern="^[А-Яа-яЁёa-zA-Z\s]+$"
-  //       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  //       required
-  //       onChange={inputChange}
-  //     />
-  //   </Wrapper>
-  //   <Wrapper>
-  //     <Label htmlFor="number">Phone number</Label>
-  //     <Input
-  //       type="tel"
-  //       name="number"
-  //       // pattern="^[0-9]+$"
-  //       pattern="\+?[0-9\s\-\(\)]+"
-  //       title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  //       required
-  //       onChange={inputChange}
-  //     />
-  //   </Wrapper>
-  //   <Button type="submit"> Create </Button>
-  // </form>
 };

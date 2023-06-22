@@ -13,7 +13,6 @@ export default function Register() {
       <Typography
         variant="h5"
         component="h2"
-        color="secondary"
         sx={{
           textTransform: 'uppercase',
           mb: '24px',
