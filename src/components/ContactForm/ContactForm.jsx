@@ -16,7 +16,7 @@ export const ContactForm = () => {
     if (event.target.name === 'name') {
       setName(event.target.value);
     }
-    if (event.target.name === 'phone') {
+    if (event.target.name === 'number') {
       setNumber(event.target.value);
     }
   };
